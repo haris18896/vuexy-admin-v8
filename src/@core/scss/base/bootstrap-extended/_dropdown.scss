@@ -20,6 +20,8 @@
 
 // dropdown menu
 .dropdown-menu {
+  // border: 1px solid rgba($black, 0.05); // border opacity has been reduced to make it look same as vue's dropdown border [component page, list view page]
+  border-radius: $dropdown-border-radius;
   transform: scale(1, 0);
   box-shadow: $dropdown-box-shadow; // this according to vue version
 
@@ -131,8 +133,8 @@
   }
 }
 
-// DropStart
-.dropstart {
+// DropLeft
+.dropleft {
   .dropdown-toggle {
     // changed icon dropup caret
     &::before {
@@ -153,8 +155,8 @@
   }
 }
 
-// DropEnd
-.dropend {
+// DropRight
+.dropright {
   .dropdown-toggle {
     // changed icon dropup caret
     &::after {
@@ -177,23 +179,21 @@
 .dropdown-menu {
   // Dropdown margin according to dropdown position
 
-  &[data-popper-placement='bottom-start'],
-  &[data-popper-placement='bottom-end'] {
-    margin-top: $dropdown_spacing !important;
+  &[x-placement='bottom-start'],
+  &[x-placement='bottom-end'] {
+    margin-top: $dropdown_spacing;
   }
 
-  &[data-popper-placement='top-start'],
-  &[data-popper-placement='top-end'] {
-    margin-bottom: $dropdown_spacing !important;
+  &[x-placement='top-start'],
+  &[x-placement='top-end'] {
+    margin-bottom: $dropdown_spacing;
   }
 
-  &[data-popper-placement='right-start'],
-  &[data-popper-placement='right-end'] {
-    margin-left: $dropdown_spacing !important;
+  &[x-placement='right-start'] {
+    margin-left: $dropdown_spacing;
   }
-  &[data-popper-placement='left-start'],
-  &[data-popper-placement='left-end'] {
-    margin-right: $dropdown_spacing !important;
+  &[x-placement='left-start'] {
+    margin-right: $dropdown_spacing;
   }
 }
 

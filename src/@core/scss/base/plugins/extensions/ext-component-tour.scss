@@ -57,7 +57,7 @@
       }
     }
   }
-  @include media-breakpoint-down(sm) {
+  @include media-breakpoint-down(xs) {
     width: 300px;
   }
 }

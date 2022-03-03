@@ -4,13 +4,12 @@ import { useLocation } from 'react-router-dom'
 
 // ** Store & Actions
 import { useSelector, useDispatch } from 'react-redux'
-import { handleMenuCollapsed, handleContentWidth, handleMenuHidden } from '@store/layout'
+import { handleMenuCollapsed, handleContentWidth, handleMenuHidden } from '@store/actions/layout'
 
 // ** Third Party Components
 import classnames from 'classnames'
 import { ArrowUp } from 'react-feather'
-
-// ** Reactstrap Imports
+import ScrollToTop from 'react-scroll-up'
 import { Navbar, Button } from 'reactstrap'
 
 // ** Configs
@@ -18,7 +17,6 @@ import themeConfig from '@configs/themeConfig'
 
 // ** Custom Components
 import Customizer from '@components/customizer'
-import ScrollToTop from '@components/scrolltop'
 import FooterComponent from './components/footer'
 import NavbarComponent from './components/navbar'
 import SidebarComponent from './components/menu/vertical-menu'
@@ -36,14 +34,14 @@ import '@styles/base/core/menu/menu-types/vertical-overlay-menu.scss'
 
 const VerticalLayout = props => {
   // ** Props
-  const { menu, navbar, footer, menuData, children, routerProps, setLastLayout, currentActiveItem } = props
+  const { children, navbar, footer, menu, routerProps, currentActiveItem } = props
 
   // ** Hooks
+  const [skin, setSkin] = useSkin()
   const [isRtl, setIsRtl] = useRTL()
-  const { skin, setSkin } = useSkin()
-  const { navbarType, setNavbarType } = useNavbarType()
-  const { footerType, setFooterType } = useFooterType()
-  const { navbarColor, setNavbarColor } = useNavbarColor()
+  const [navbarType, setNavbarType] = useNavbarType()
+  const [footerType, setFooterType] = useFooterType()
+  const [navbarColor, setNavbarColor] = useNavbarColor()
 
   // ** States
   const [isMounted, setIsMounted] = useState(false)
@@ -98,21 +96,21 @@ const VerticalLayout = props => {
   const footerClasses = {
     static: 'footer-static',
     sticky: 'footer-fixed',
-    hidden: 'footer-hidden'
+    hidden: 'footer-hidden',
   }
 
   const navbarWrapperClasses = {
     floating: 'navbar-floating',
     sticky: 'navbar-sticky',
     static: 'navbar-static',
-    hidden: 'navbar-hidden'
+    hidden: 'navbar-hidden',
   }
 
   const navbarClasses = {
-    floating: contentWidth === 'boxed' ? 'floating-nav container-xxl' : 'floating-nav',
+    floating: 'floating-nav',
     sticky: 'fixed-top',
     static: 'navbar-static-top',
-    hidden: 'd-none'
+    hidden: 'd-none',
   }
 
   const bgColorCondition = navbarColor !== '' && navbarColor !== 'light' && navbarColor !== 'white'
@@ -135,7 +133,7 @@ const VerticalLayout = props => {
           // Overlay Menu
           'vertical-overlay-menu': windowWidth < 1200,
           'menu-hide': !menuVisibility && windowWidth < 1200,
-          'menu-open': menuVisibility && windowWidth < 1200
+          'menu-open': menuVisibility && windowWidth < 1200,
         }
       )}
       {...(isHidden ? { 'data-col': '1-column' } : {})}
@@ -144,19 +142,17 @@ const VerticalLayout = props => {
         <SidebarComponent
           skin={skin}
           menu={menu}
-          menuData={menuData}
-          routerProps={routerProps}
           menuCollapsed={menuCollapsed}
           menuVisibility={menuVisibility}
           setMenuCollapsed={setMenuCollapsed}
           setMenuVisibility={setMenuVisibility}
+          routerProps={routerProps}
           currentActiveItem={currentActiveItem}
         />
       ) : null}
 
       <Navbar
         expand='lg'
-        container={false}
         light={skin !== 'dark'}
         dark={skin === 'dark' || bgColorCondition}
         color={bgColorCondition ? navbarColor : undefined}
@@ -165,7 +161,11 @@ const VerticalLayout = props => {
         )}
       >
         <div className='navbar-container d-flex content'>
-          {navbar ? navbar : <NavbarComponent setMenuVisibility={setMenuVisibility} skin={skin} setSkin={setSkin} />}
+          {navbar ? (
+            navbar({ setMenuVisibility, skin, setSkin })
+          ) : (
+            <NavbarComponent setMenuVisibility={setMenuVisibility} skin={skin} setSkin={setSkin} />
+          )}
         </div>
       </Navbar>
       {children}
@@ -173,7 +173,7 @@ const VerticalLayout = props => {
       {/* Vertical Nav Menu Overlay */}
       <div
         className={classnames('sidenav-overlay', {
-          show: menuVisibility
+          show: menuVisibility,
         })}
         onClick={() => setMenuVisibility(false)}
       ></div>
@@ -193,7 +193,6 @@ const VerticalLayout = props => {
           setIsRtl={setIsRtl}
           layout={props.layout}
           setLayout={props.setLayout}
-          setLastLayout={setLastLayout}
           isHidden={isHidden}
           setIsHidden={setIsHidden}
           contentWidth={contentWidth}
@@ -207,15 +206,19 @@ const VerticalLayout = props => {
       ) : null}
       <footer
         className={classnames(`footer footer-light ${footerClasses[footerType] || 'footer-static'}`, {
-          'd-none': footerType === 'hidden'
+          'd-none': footerType === 'hidden',
         })}
       >
-        {footer ? footer : <FooterComponent footerType={footerType} footerClasses={footerClasses} />}
+        {footer ? (
+          footer({ footerType, footerClasses })
+        ) : (
+          <FooterComponent footerType={footerType} footerClasses={footerClasses} />
+        )}
       </footer>
 
       {themeConfig.layout.scrollTop === true ? (
         <div className='scroll-to-top'>
-          <ScrollToTop showOffset={300} className='scroll-top d-block'>
+          <ScrollToTop showUnder={300} style={{ bottom: '5%' }}>
             <Button className='btn-icon' color='primary'>
               <ArrowUp size={14} />
             </Button>

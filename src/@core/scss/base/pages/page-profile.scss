@@ -106,7 +106,7 @@
 }
 
 // Latest Photo Section - Image size
-@include media-breakpoint-down(lg) {
+@include media-breakpoint-down(md) {
   #user-profile {
     .profile-latest-img {
       img {
@@ -127,7 +127,7 @@
 }
 
 // profile img and title
-@include media-breakpoint-down(sm) {
+@include media-breakpoint-down(xs) {
   #user-profile {
     .profile-header {
       .profile-img-container {

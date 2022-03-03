@@ -2,6 +2,7 @@
 
 # dependencies
 /node_modules
+.env
 /.pnp
 .pnp.js
 
@@ -25,3 +26,5 @@ yarn-error.log*
 .docz
 .eslintcache
 .vscode
+
+/react-shell-scripts

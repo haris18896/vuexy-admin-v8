@@ -47,7 +47,7 @@
 
   // divider positions config
 
-  &.divider-start {
+  &.divider-left {
     .divider-text {
       float: left;
       padding-left: 0;
@@ -56,13 +56,13 @@
       }
     }
   }
-  &.divider-start-center {
+  &.divider-left-center {
     .divider-text {
       left: -25%;
     }
   }
 
-  &.divider-end {
+  &.divider-right {
     .divider-text {
       float: right;
       padding-right: 0;
@@ -71,7 +71,7 @@
       }
     }
   }
-  &.divider-end-center {
+  &.divider-right-center {
     .divider-text {
       right: -25%;
     }

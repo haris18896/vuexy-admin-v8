@@ -4,8 +4,6 @@ import { Fragment, useState } from 'react'
 // ** Third Party Components
 import PropTypes from 'prop-types'
 import { Code } from 'react-feather'
-
-// ** Reactstrap Imports
 import { Card, CardHeader, CardBody, CardTitle, Collapse } from 'reactstrap'
 
 const CardSnippet = props => {
@@ -44,10 +42,10 @@ export default CardSnippet
 
 // ** PropTypes
 CardSnippet.propTypes = {
-  code: PropTypes.node,
-  noBody: PropTypes.bool,
-  children: PropTypes.any,
-  iconCode: PropTypes.node,
   className: PropTypes.string,
-  title: PropTypes.string.isRequired
+  title: PropTypes.string.isRequired,
+  children: PropTypes.any,
+  code: PropTypes.node,
+  iconCode: PropTypes.node,
+  noBody: PropTypes.bool
 }

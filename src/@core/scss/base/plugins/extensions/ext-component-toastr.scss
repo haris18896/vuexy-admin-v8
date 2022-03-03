@@ -50,10 +50,17 @@
     border-radius: 50%;
     color: $white;
     position: absolute;
-    left: 1.25rem;
+    left: 1rem;
+  }
+  &:after {
+    content: '';
     background-size: $font-size-base;
     background-repeat: no-repeat;
-    background-position: center;
+    position: absolute;
+    left: 1.38rem;
+    top: 1.44rem;
+    width: $font-size-base;
+    height: $font-size-base;
   }
 }
 
@@ -68,6 +75,8 @@
   }
   &:before {
     background-color: $success;
+  }
+  &:after {
     background-image: url(str-replace(str-replace($check, 'currentColor', $white), '#', '%23'));
   }
 }
@@ -80,6 +89,8 @@
   }
   &:before {
     background-color: $danger;
+  }
+  &:after {
     background-image: url(str-replace(str-replace($remove, 'currentColor', $white), '#', '%23'));
   }
 }
@@ -92,6 +103,8 @@
   }
   &:before {
     background-color: $info;
+  }
+  &:after {
     background-image: url(str-replace(str-replace($infoIcon, 'currentColor', $white), '#', '%23'));
   }
 }
@@ -104,6 +117,8 @@
   }
   &:before {
     background-color: $warning;
+  }
+  &:after {
     background-image: url(str-replace(str-replace($warningIcon, 'currentColor', $white), '#', '%23'));
   }
 }
@@ -120,7 +135,6 @@
 .toast-top-center,
 .toast-top-full-width {
   top: 1.3rem;
-  width: 100% !important;
 }
 .toast-bottom-left {
   bottom: 1.3rem;
@@ -133,7 +147,6 @@
 .toast-bottom-center,
 .toast-bottom-full-width {
   bottom: 1.3rem;
-  width: 100% !important;
 }
 
 // Media query
@@ -152,8 +165,7 @@
     width: 20rem;
   }
   .toast-top-left {
-    left: 1rem;
-    //   left: 0;
+    left: 0;
   }
   #toast-container {
     &.toast-top-center,
@@ -174,7 +186,7 @@
     }
   }
   .toast-bottom-left {
-    left: 1rem;
+    left: 0.25rem;
     bottom: 0.75rem;
   }
   .toast-bottom-right {
@@ -211,7 +223,7 @@
 
 [data-textdirection='rtl'] {
   .toast .toast-close-button {
-    @include media-breakpoint-down(sm) {
+    @include media-breakpoint-down(xs) {
       top: 0.55rem !important;
       right: 0.5rem !important;
     }

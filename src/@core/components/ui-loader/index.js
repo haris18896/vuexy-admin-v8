@@ -1,14 +1,9 @@
-// ** React Imports
-import { Fragment } from 'react'
-
 // ** Third Party Components
+import { Fragment } from 'react'
 import Proptypes from 'prop-types'
 import classnames from 'classnames'
-
-// ** Reactstrap Imports
 import { Spinner } from 'reactstrap'
 
-// ** Styles
 import './ui-loader.scss'
 
 const UILoader = props => {

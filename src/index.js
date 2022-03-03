@@ -4,14 +4,14 @@ import ReactDOM from 'react-dom'
 
 // ** Redux Imports
 import { Provider } from 'react-redux'
-import { store } from './redux/store'
+import { store } from './redux/storeConfig/store'
 
-// ** Intl & ThemeColors Context
+// ** Toast & ThemeColors Context
 import { ToastContainer } from 'react-toastify'
 import { ThemeContext } from './utility/context/ThemeColors'
 
 // ** Spinner (Splash Screen)
-import Spinner from './@core/components/spinner/Fallback-spinner'
+import Spinner from './@core/components/spinner/SplashSpinner'
 
 // ** Ripple Button
 import './@core/components/ripple-button'

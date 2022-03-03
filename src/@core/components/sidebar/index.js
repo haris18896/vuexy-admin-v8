@@ -2,25 +2,23 @@
 import { X } from 'react-feather'
 import Proptypes from 'prop-types'
 import classnames from 'classnames'
-import PerfectScrollbar from 'react-perfect-scrollbar'
-
 import { Modal, ModalHeader, ModalBody } from 'reactstrap'
 
 const Sidebar = props => {
   // ** Props
   const {
-    open,
-    size,
-    title,
     width,
-    children,
-    closeBtn,
-    className,
+    open,
     toggleSidebar,
+    size,
     bodyClassName,
     contentClassName,
     wrapperClassName,
     headerClassName,
+    className,
+    title,
+    children,
+    closeBtn,
     ...rest
   } = props
 
@@ -31,7 +29,7 @@ const Sidebar = props => {
     <Modal
       isOpen={open}
       toggle={toggleSidebar}
-      contentClassName={classnames('overflow-hidden', {
+      contentClassName={classnames({
         [contentClassName]: contentClassName
       })}
       modalClassName={classnames('modal-slide-in', {
@@ -63,15 +61,13 @@ const Sidebar = props => {
           <span className='align-middle'>{title}</span>
         </h5>
       </ModalHeader>
-      <PerfectScrollbar options={{ wheelPropagation: false }}>
-        <ModalBody
-          className={classnames('flex-grow-1', {
-            [bodyClassName]: bodyClassName
-          })}
-        >
-          {children}
-        </ModalBody>
-      </PerfectScrollbar>
+      <ModalBody
+        className={classnames('flex-grow-1', {
+          [bodyClassName]: bodyClassName
+        })}
+      >
+        {children}
+      </ModalBody>
     </Modal>
   )
 }
@@ -80,14 +76,14 @@ export default Sidebar
 
 // ** PropTypes
 Sidebar.propTypes = {
+  title: Proptypes.string.isRequired,
+  open: Proptypes.bool.isRequired,
+  toggleSidebar: Proptypes.func.isRequired,
+  size: Proptypes.oneOf(['sm', 'lg']),
   className: Proptypes.string,
   bodyClassName: Proptypes.string,
-  open: Proptypes.bool.isRequired,
-  title: Proptypes.string.isRequired,
   contentClassName: Proptypes.string,
   wrapperClassName: Proptypes.string,
   children: Proptypes.any.isRequired,
-  size: Proptypes.oneOf(['sm', 'lg']),
-  toggleSidebar: Proptypes.func.isRequired,
   width: Proptypes.oneOfType([Proptypes.number, Proptypes.string])
 }

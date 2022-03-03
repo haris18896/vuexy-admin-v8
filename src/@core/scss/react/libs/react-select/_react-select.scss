@@ -11,9 +11,6 @@
 // Select Control(Input)
 .select__control,
 .react-select__control {
-  .select__input {
-    color: $body-color !important;
-  }
   &.select__control--is-disabled {
     border-color: $border-color;
     .select__indicator-separator {
@@ -29,7 +26,6 @@
 
   .select__indicator svg {
     cursor: pointer;
-    color: $body-color;
   }
 
   .select__indicator-separator {
@@ -131,10 +127,6 @@
       fill: $theme-dark-body-color;
     }
 
-    .select__input {
-      color: $theme-dark-body-color !important;
-    }
-
     .select__indicator span,
     .select__single-value {
       color: $theme-dark-body-color;
@@ -163,23 +155,7 @@
       opacity: 0.5;
     }
   }
-  .select__menu-list,
-  .react-select__menu-list {
-    .select__group {
-      .select__group-heading {
-        color: $theme-dark-headings-color;
-      }
-    }
-  }
   .select__menu {
     background-color: $theme-dark-card-bg;
-  }
-}
-
-html[dir='rtl'] {
-  .select__control {
-    .select__loading-indicator {
-      flex-direction: row-reverse;
-    }
   }
 }

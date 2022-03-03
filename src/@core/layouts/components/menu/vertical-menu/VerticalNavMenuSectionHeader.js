@@ -1,7 +1,7 @@
 // ** Third Party Components
 import { MoreHorizontal } from 'react-feather'
 
-const VerticalNavMenuSectionHeader = ({ item }) => {
+const VerticalNavMenuSectionHeader = ({ item, index }) => {
   return (
     <li className='navigation-header'>
       <span>{item.header}</span>

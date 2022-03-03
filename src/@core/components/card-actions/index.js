@@ -6,9 +6,7 @@ import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import UiLoader from '@components/ui-loader'
 import { ChevronDown, RotateCw, X } from 'react-feather'
-
-// ** Reactstrap Imports
-import { Card, CardHeader, CardTitle, Collapse } from 'reactstrap'
+import { Card, CardHeader, CardTitle, Collapse, Spinner } from 'reactstrap'
 
 const CardActions = props => {
   // ** Props
@@ -55,7 +53,7 @@ const CardActions = props => {
           <Tag
             key={i}
             className={classnames('cursor-pointer', {
-              'me-50': i < actions.length - 1
+              'mr-50': i < actions.length - 1
             })}
             size={15}
             onClick={() => callAction(action)}
@@ -117,10 +115,10 @@ export default CardActions
 
 // ** PropTypes
 CardActions.propTypes = {
+  title: PropTypes.string.isRequired,
+  collapseIcon: PropTypes.any,
   removeIcon: PropTypes.any,
   reloadIcon: PropTypes.any,
-  collapseIcon: PropTypes.any,
-  title: PropTypes.string.isRequired,
   actions: PropTypes.oneOfType([PropTypes.string, PropTypes.arrayOf(PropTypes.string)]).isRequired,
   endReload(props) {
     // ** User passes reload action and doesn't pass endReload then return Error

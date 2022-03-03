@@ -1,20 +1,42 @@
 // ** React Imports
 import { useEffect } from 'react'
-import { NavLink } from 'react-router-dom'
+import { NavLink, useLocation } from 'react-router-dom'
+
+// ** Horizontal menu items array
+import navigation from '@src/navigation/horizontal'
 
 // ** Third Party Components
 import classnames from 'classnames'
 
+// ** Utils
+import { isNavLinkActive, search, getAllParents } from '@layouts/utils'
+
 const HorizontalNavMenuLink = ({
   item,
-  isChild,
+  setOpenDropdown,
+  setGroupActive,
   activeItem,
   setActiveItem,
-  setOpenDropdown,
-  currentActiveItem
+  routerProps,
+  currentActiveItem,
+  isChild
 }) => {
   // ** Conditional Link Tag, if item has newTab or externalLink props use <a> tag else use NavLink
   const LinkTag = item.externalLink ? 'a' : NavLink
+
+  // ** URL Vars
+  const location = useLocation()
+  const currentURL = location.pathname
+
+  const navLinkActive = isNavLinkActive(item.navLink, currentURL, routerProps)
+
+  // ** Get parents of current items
+  const searchParents = (navigation, currentURL) => {
+    const parents = search(navigation, currentURL, routerProps) // Search for parent object
+    const allParents = getAllParents(parents, 'id') // Parents Object to Parents Array
+    allParents.pop()
+    return allParents
+  }
 
   // ** Remove all items from OpenDropdown array
   const resetOpenDropdowns = () => setOpenDropdown([])
@@ -23,6 +45,8 @@ const HorizontalNavMenuLink = ({
   useEffect(() => {
     if (currentActiveItem !== null) {
       setActiveItem(currentActiveItem)
+      const arr = searchParents(navigation, currentURL)
+      setGroupActive([...arr])
     }
   }, [location])
 
@@ -53,11 +77,7 @@ const HorizontalNavMenuLink = ({
                   return false
                 }
 
-                if (
-                  match.url &&
-                  match.url !== '' &&
-                  match.url === item.navLink
-                ) {
+                if (match.url && match.url !== '' && match.url === item.navLink) {
                   currentActiveItem = item.navLink
                 }
               }

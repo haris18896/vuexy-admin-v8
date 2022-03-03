@@ -13,7 +13,7 @@ import '../../../@core/scss/base/plugins/forms/form-wizard.scss'
 
 const Wizard = forwardRef((props, ref) => {
   // ** Props
-  const { type, className, contentClassName, headerClassName, steps, separator, options, instance } = props
+  const { type, className, steps, separator, options, instance } = props
 
   // ** State
   const [activeIndex, setActiveIndex] = useState(0)
@@ -66,7 +66,6 @@ const Wizard = forwardRef((props, ref) => {
       return (
         <div
           className={classnames('content', {
-            [contentClassName]: contentClassName,
             'active dstepper-block': activeIndex === index
           })}
           id={step.id}
@@ -88,7 +87,7 @@ const Wizard = forwardRef((props, ref) => {
         'wizard-modern': type === 'modern-horizontal'
       })}
     >
-      <div className={classnames('bs-stepper-header', { [headerClassName]: headerClassName })}>{renderHeader()}</div>
+      <div className='bs-stepper-header'>{renderHeader()}</div>
       <div className='bs-stepper-content'>{renderContent()}</div>
     </div>
   )
@@ -98,9 +97,9 @@ export default Wizard
 
 // ** Default Props
 Wizard.defaultProps = {
-  options: {},
   type: 'horizontal',
-  separator: <ChevronRight size={17} />
+  separator: <ChevronRight size={17} />,
+  options: {}
 }
 
 // ** PropTypes
@@ -110,8 +109,6 @@ Wizard.propTypes = {
   options: PropTypes.object,
   className: PropTypes.string,
   separator: PropTypes.element,
-  headerClassName: PropTypes.string,
-  contentClassName: PropTypes.string,
   steps: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string.isRequired,

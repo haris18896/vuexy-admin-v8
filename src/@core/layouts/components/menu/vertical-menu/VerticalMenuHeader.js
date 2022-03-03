@@ -1,8 +1,9 @@
 // ** React Imports
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
+import { useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
 
-// ** Icons Imports
+// ** Third Party Components
 import { Disc, X, Circle } from 'react-feather'
 
 // ** Config
@@ -11,6 +12,9 @@ import themeConfig from '@configs/themeConfig'
 const VerticalMenuHeader = props => {
   // ** Props
   const { menuCollapsed, setMenuCollapsed, setMenuVisibility, setGroupOpen, menuHover } = props
+
+  // ** Redux
+  const { currentSkin } = useSelector(state => state.skin)
 
   // ** Reset open group
   useEffect(() => {
@@ -43,12 +47,29 @@ const VerticalMenuHeader = props => {
   return (
     <div className='navbar-header'>
       <ul className='nav navbar-nav flex-row'>
-        <li className='nav-item me-auto'>
+        <li className='nav-item mr-auto'>
           <NavLink to='/' className='navbar-brand'>
-            <span className='brand-logo'>
-              <img src={themeConfig.app.appLogoImage} alt='logo' />
-            </span>
-            <h2 className='brand-text mb-0'>{themeConfig.app.appName}</h2>
+            {/* <span className='brand-logo'></span> */}
+
+            {!menuCollapsed ? (
+              currentSkin === '"dark"' || currentSkin === 'dark' ? (
+                <img src={themeConfig.app.appLogoImageLight} alt='logo-dark' height='30px' />
+              ) : (
+                <img src={themeConfig.app.appLogoImageDark} alt='logo-dark' height='30px' />
+              )
+            ) : currentSkin === '"dark"' || currentSkin === 'dark' ? (
+              <img src={themeConfig.app.appLogoImage02} alt='logo-dark' height='30px' />
+            ) : (
+              <img src={themeConfig.app.appLogoImage01} alt='logo-dark' height='38px' />
+            )}
+
+            {/* {currentSkin === '"dark"' || currentSkin === 'dark' ? (
+              <img src={themeConfig.app.appLogoImageLight} alt='logo-dark' height='30px' />
+            ) : (
+              <img src={themeConfig.app.appLogoImageDark} alt='logo-dark' height='30px' />
+            )} */}
+
+            {/* <h2 className='brand-text mb-0'>{themeConfig.app.appName}</h2> */}
           </NavLink>
         </li>
         <li className='nav-item nav-toggle'>

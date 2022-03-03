@@ -1,6 +1,7 @@
 .card {
+  border: none;
   margin-bottom: $content-padding;
-  box-shadow: $card-box-shadow;
+  box-shadow: $box-shadow;
   transition: all 0.3s ease-in-out, background 0s, color 0s, border-color 0s;
   .card {
     box-shadow: none !important;
@@ -55,6 +56,9 @@
     align-items: center;
     flex-wrap: wrap;
     justify-content: space-between;
+    border-bottom: none;
+    padding: 1.5rem;
+    background-color: transparent;
     .card-title {
       margin-bottom: 0;
     }
@@ -104,8 +108,15 @@
     background-color: transparent;
   }
 }
+// Card Column
+.card-columns {
+  .card {
+    margin-bottom: $spacer * 2.2;
+  }
+}
 
-.card-group {
+.card-group,
+.card-deck {
   margin-bottom: 0.75rem;
 }
 
@@ -171,7 +182,7 @@
     top: 0;
     left: 0;
 
-    @include media-breakpoint-down(sm) {
+    @include media-breakpoint-down(xs) {
       width: 140px;
     }
   }
@@ -182,7 +193,7 @@
     top: 0;
     right: 0;
 
-    @include media-breakpoint-down(sm) {
+    @include media-breakpoint-down(xs) {
       width: 140px;
     }
   }
@@ -225,17 +236,17 @@
 
     .meetup-day {
       text-align: center;
-      border-right: 1px solid $input-border-color;
+      border-right: 1px solid $custom-control-border-color;
       padding-right: 1.3rem;
       margin-right: 1.3rem;
     }
   }
-  .meetings {
+  .media {
     .avatar .avatar-content {
       width: 34px;
       height: 34px;
     }
-    & + .meetings {
+    & + .media {
       margin-top: 1.2rem;
     }
   }
@@ -459,7 +470,7 @@
     padding: 2rem 3rem;
     text-align: center;
 
-    @include media-breakpoint-down(md) {
+    @include media-breakpoint-down(sm) {
       padding-top: 0;
     }
 

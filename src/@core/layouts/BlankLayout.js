@@ -4,16 +4,14 @@ import { useEffect, useState } from 'react'
 // ** Custom Hooks
 import { useSkin } from '@hooks/useSkin'
 
-// ** Third Party Components
-import classnames from 'classnames'
+const BlankLayout = ({ children, ...rest }) => {
+  // ** Hooks
+  const [skin, setSkin] = useSkin()
 
-const BlankLayout = ({ children }) => {
   // ** States
   const [isMounted, setIsMounted] = useState(false)
 
-  // ** Hooks
-  const { skin } = useSkin()
-
+  //** ComponentDidMount
   useEffect(() => {
     setIsMounted(true)
     return () => setIsMounted(false)
@@ -24,11 +22,7 @@ const BlankLayout = ({ children }) => {
   }
 
   return (
-    <div
-      className={classnames('blank-page', {
-        'dark-layout': skin === 'dark'
-      })}
-    >
+    <div className='blank-page'>
       <div className='app-content content'>
         <div className='content-wrapper'>
           <div className='content-body'>{children}</div>

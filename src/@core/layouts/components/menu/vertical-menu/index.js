@@ -1,6 +1,9 @@
 // ** React Imports
 import { Fragment, useState, useRef } from 'react'
 
+// ** Vertical Menu Items Array
+import navigation from '@src/navigation/vertical'
+
 // ** Third Party Components
 import classnames from 'classnames'
 import PerfectScrollbar from 'react-perfect-scrollbar'
@@ -11,12 +14,11 @@ import VerticalNavMenuItems from './VerticalNavMenuItems'
 
 const Sidebar = props => {
   // ** Props
-  const { menuCollapsed, routerProps, menu, currentActiveItem, skin, menuData } = props
+  const { menuCollapsed, routerProps, menu, currentActiveItem, skin } = props
 
   // ** States
   const [groupOpen, setGroupOpen] = useState([])
   const [groupActive, setGroupActive] = useState([])
-  const [currentActiveGroup, setCurrentActiveGroup] = useState([])
   const [activeItem, setActiveItem] = useState(null)
 
   // ** Menu Hover State
@@ -27,7 +29,9 @@ const Sidebar = props => {
 
   // ** Function to handle Mouse Enter
   const onMouseEnter = () => {
-    setMenuHover(true)
+    if (menuCollapsed) {
+      setMenuHover(true)
+    }
   }
 
   // ** Scroll Menu
@@ -55,7 +59,7 @@ const Sidebar = props => {
         onMouseLeave={() => setMenuHover(false)}
       >
         {menu ? (
-          menu
+          menu(props)
         ) : (
           <Fragment>
             {/* Vertical Menu Header */}
@@ -70,19 +74,16 @@ const Sidebar = props => {
             >
               <ul className='navigation navigation-main'>
                 <VerticalNavMenuItems
-                  items={menuData}
-                  menuData={menuData}
-                  menuHover={menuHover}
-                  groupOpen={groupOpen}
-                  activeItem={activeItem}
+                  items={navigation}
                   groupActive={groupActive}
-                  currentActiveGroup={currentActiveGroup}
-                  routerProps={routerProps}
-                  setGroupOpen={setGroupOpen}
-                  menuCollapsed={menuCollapsed}
-                  setActiveItem={setActiveItem}
                   setGroupActive={setGroupActive}
-                  setCurrentActiveGroup={setCurrentActiveGroup}
+                  activeItem={activeItem}
+                  setActiveItem={setActiveItem}
+                  groupOpen={groupOpen}
+                  setGroupOpen={setGroupOpen}
+                  routerProps={routerProps}
+                  menuCollapsed={menuCollapsed}
+                  menuHover={menuHover}
                   currentActiveItem={currentActiveItem}
                 />
               </ul>

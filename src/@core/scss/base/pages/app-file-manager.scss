@@ -11,7 +11,6 @@
 @import '../components/include'; // Components includes
 
 $file-manager-logo-height: 7.5rem;
-$file-manager-fs-xl: ($font-size-base + 0.5);
 
 // file manager app container
 .file-manager-application {
@@ -37,7 +36,7 @@ $file-manager-fs-xl: ($font-size-base + 0.5);
         position: absolute;
         top: 0.25rem;
         right: 0.25rem;
-        font-size: $file-manager-fs-xl;
+        font-size: $font-size-xl;
         z-index: 5;
         cursor: pointer;
       }
@@ -138,7 +137,7 @@ $file-manager-fs-xl: ($font-size-base + 0.5);
 
       // styles for searchbar
       .file-manager-content-header {
-        padding: 0.47rem 1rem;
+        padding: 0.4rem 1rem;
         border-bottom: 1px solid $border-color;
         background-color: $white;
         border-top-right-radius: $border-radius;
@@ -179,7 +178,7 @@ $file-manager-fs-xl: ($font-size-base + 0.5);
               padding-bottom: 0.5rem;
             }
 
-            .form-check-input:not(:checked) {
+            .custom-control-input:not(:checked) ~ .custom-control-label:before {
               background-color: transparent;
             }
 
@@ -281,7 +280,7 @@ $file-manager-fs-xl: ($font-size-base + 0.5);
                   right: 1rem;
                 }
               }
-              .form-check {
+              .custom-checkbox {
                 margin: 0 0.4rem 0 1.75rem;
               }
 
@@ -322,7 +321,7 @@ $file-manager-fs-xl: ($font-size-base + 0.5);
                 font-size: 85%;
               }
               &:not(.selected):not(:hover) {
-                .form-check,
+                .custom-checkbox,
                 .toggle-dropdown {
                   opacity: 0;
                 }
@@ -334,7 +333,7 @@ $file-manager-fs-xl: ($font-size-base + 0.5);
               &.folder.level-up {
                 display: none !important;
               }
-              .form-check {
+              .custom-checkbox {
                 position: absolute;
                 top: 1rem;
                 left: 1rem;
@@ -376,7 +375,7 @@ $file-manager-fs-xl: ($font-size-base + 0.5);
   }
 }
 
-@include media-breakpoint-down(md) {
+@include media-breakpoint-down(sm) {
   .file-manager-application {
     .view-container {
       .file-manager-item {
@@ -386,7 +385,7 @@ $file-manager-fs-xl: ($font-size-base + 0.5);
   }
 }
 
-@include media-breakpoint-down(sm) {
+@include media-breakpoint-down(xs) {
   .file-manager-application {
     .content-area-wrapper {
       .file-manager-main-content {
@@ -419,16 +418,16 @@ $file-manager-fs-xl: ($font-size-base + 0.5);
   }
 }
 
-// @include media-breakpoint-up(sm) {
-//   .file-manager-application {
-//     .view-container {
-//       .file-manager-item {
-//         flex: 0 0 47%;
-//         max-width: 50%;
-//       }
-//     }
-//   }
-// }
+@include media-breakpoint-up(xs) {
+  .file-manager-application {
+    .view-container {
+      .file-manager-item {
+        flex: 0 0 47%;
+        max-width: 50%;
+      }
+    }
+  }
+}
 
 @include media-breakpoint-up(sm) {
   .file-manager-application {

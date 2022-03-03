@@ -4,13 +4,12 @@ import { Link } from 'react-router-dom'
 
 // ** Store & Actions
 import { useSelector, useDispatch } from 'react-redux'
-import { handleMenuHidden, handleContentWidth } from '@store/layout'
+import { handleMenuHidden, handleContentWidth } from '@store/actions/layout'
 
 // ** Third Party Components
 import classnames from 'classnames'
 import { ArrowUp } from 'react-feather'
-
-// ** Reactstrap Imports
+import ScrollToTop from 'react-scroll-up'
 import { Navbar, NavItem, Button } from 'reactstrap'
 
 // ** Configs
@@ -18,7 +17,6 @@ import themeConfig from '@configs/themeConfig'
 
 // ** Custom Components
 import Customizer from '@components/customizer'
-import ScrollToTop from '@components/scrolltop'
 import NavbarComponent from './components/navbar'
 import FooterComponent from './components/footer'
 import MenuComponent from './components/menu/horizontal-menu'
@@ -35,14 +33,14 @@ import '@styles/base/core/menu/menu-types/horizontal-menu.scss'
 
 const HorizontalLayout = props => {
   // ** Props
-  const { children, navbar, menuData, footer, menu, currentActiveItem, routerProps, setLastLayout } = props
+  const { children, navbar, footer, menu, currentActiveItem, routerProps } = props
 
   // ** Hooks
-  const { skin, setSkin } = useSkin()
+  const [skin, setSkin] = useSkin()
   const [isRtl, setIsRtl] = useRTL()
-  const { navbarType, setNavbarType } = useNavbarType()
-  const { footerType, setFooterType } = useFooterType()
-  const { navbarColor, setNavbarColor } = useNavbarColor()
+  const [navbarType, setNavbarType] = useNavbarType()
+  const [footerType, setFooterType] = useFooterType()
+  const [navbarColor, setNavbarColor] = useNavbarColor()
 
   // ** States
   const [isMounted, setIsMounted] = useState(false)
@@ -96,7 +94,7 @@ const HorizontalLayout = props => {
   }
 
   const navbarClasses = {
-    floating: contentWidth === 'boxed' ? 'floating-nav container-xxl' : 'floating-nav',
+    floating: 'floating-nav',
     sticky: 'fixed-top'
   }
 
@@ -117,7 +115,6 @@ const HorizontalLayout = props => {
     >
       <Navbar
         expand='lg'
-        container={false}
         className={classnames('header-navbar navbar-fixed align-items-center navbar-shadow navbar-brand-center', {
           'navbar-scrolled': navbarScrolled
         })}
@@ -138,7 +135,7 @@ const HorizontalLayout = props => {
         )}
 
         <div className='navbar-container d-flex content'>
-          {navbar ? navbar : <NavbarComponent skin={skin} setSkin={setSkin} />}
+          {navbar ? navbar({ skin, setSkin }) : <NavbarComponent skin={skin} setSkin={setSkin} />}
         </div>
       </Navbar>
       {!isHidden ? (
@@ -154,9 +151,9 @@ const HorizontalLayout = props => {
             })}
           >
             {menu ? (
-              menu
+              menu({ routerProps, currentActiveItem })
             ) : (
-              <MenuComponent menuData={menuData} routerProps={routerProps} currentActiveItem={currentActiveItem} />
+              <MenuComponent routerProps={routerProps} currentActiveItem={currentActiveItem} />
             )}
           </Navbar>
         </div>
@@ -176,7 +173,6 @@ const HorizontalLayout = props => {
           isRtl={isRtl}
           setIsRtl={setIsRtl}
           layout={props.layout}
-          setLastLayout={setLastLayout}
           setLayout={props.setLayout}
           isHidden={isHidden}
           setIsHidden={setIsHidden}
@@ -192,12 +188,16 @@ const HorizontalLayout = props => {
           'd-none': footerType === 'hidden'
         })}
       >
-        {footer ? footer : <FooterComponent footerType={footerType} footerClasses={footerClasses} />}
+        {footer ? (
+          footer({ footerType, footerClasses })
+        ) : (
+          <FooterComponent footerType={footerType} footerClasses={footerClasses} />
+        )}
       </footer>
 
       {themeConfig.layout.scrollTop === true ? (
         <div className='scroll-to-top'>
-          <ScrollToTop showOffset={300} className='scroll-top d-block'>
+          <ScrollToTop showUnder={300} style={{ bottom: '5%' }}>
             <Button className='btn-icon' color='primary'>
               <ArrowUp size={14} />
             </Button>

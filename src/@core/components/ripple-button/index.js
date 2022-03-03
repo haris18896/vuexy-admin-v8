@@ -2,10 +2,8 @@
 import { useState, useEffect } from 'react'
 
 // ** Third Party Components
-import classnames from 'classnames'
-
-// ** Reactstrap Imports
 import { Button } from 'reactstrap'
+import classnames from 'classnames'
 
 // ** Styles
 import './ripple-button.scss'

@@ -34,11 +34,3 @@ $misc-inner-max-width: 750px;
     }
   }
 }
-
-@media (max-height: 625px) {
-  .misc-wrapper {
-    .misc-inner {
-      margin-top: 4rem;
-    }
-  }
-}

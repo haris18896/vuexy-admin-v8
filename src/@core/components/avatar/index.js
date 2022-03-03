@@ -3,29 +3,28 @@ import { forwardRef } from 'react'
 
 // ** Third Party Components
 import Proptypes from 'prop-types'
-import classnames from 'classnames'
-
-// ** Reactstrap Imports
 import { Badge } from 'reactstrap'
+import { User } from 'react-feather'
+import classnames from 'classnames'
 
 const Avatar = forwardRef((props, ref) => {
   // ** Props
   const {
-    img,
-    size,
-    icon,
     color,
-    status,
+    className,
+    imgClassName,
+    initials,
+    size,
     badgeUp,
     content,
-    tag: Tag,
-    initials,
-    imgWidth,
-    className,
-    badgeText,
-    imgHeight,
+    icon,
     badgeColor,
-    imgClassName,
+    badgeText,
+    img,
+    imgHeight,
+    imgWidth,
+    status,
+    tag: Tag,
     contentStyles,
     ...rest
   } = props
@@ -45,7 +44,7 @@ const Avatar = forwardRef((props, ref) => {
       className={classnames('avatar', {
         [className]: className,
         [`bg-${color}`]: color,
-        [`avatar-${size}`]: size
+        [`avatar-${size}`]: size,
       })}
       ref={ref}
       {...rest}
@@ -53,7 +52,7 @@ const Avatar = forwardRef((props, ref) => {
       {img === false || img === undefined ? (
         <span
           className={classnames('avatar-content', {
-            'position-relative': badgeUp
+            'position-relative': badgeUp,
           })}
           style={contentStyles}
         >
@@ -67,21 +66,18 @@ const Avatar = forwardRef((props, ref) => {
           ) : null}
         </span>
       ) : (
-        <img
+        <User
           className={classnames({
-            [imgClassName]: imgClassName
+            [imgClassName]: imgClassName,
           })}
-          src={img}
-          alt='avatarImg'
-          height={imgHeight && !size ? imgHeight : 32}
-          width={imgWidth && !size ? imgWidth : 32}
+          size={32}
         />
       )}
       {status ? (
         <span
           className={classnames({
             [`avatar-status-${status}`]: status,
-            [`avatar-status-${size}`]: size
+            [`avatar-status-${size}`]: size,
           })}
         ></span>
       ) : null}
@@ -93,19 +89,19 @@ export default Avatar
 
 // ** PropTypes
 Avatar.propTypes = {
-  icon: Proptypes.node,
+  imgClassName: Proptypes.string,
+  className: Proptypes.string,
   src: Proptypes.string,
+  tag: Proptypes.oneOfType([Proptypes.func, Proptypes.string]),
   badgeUp: Proptypes.bool,
   content: Proptypes.string,
-  badgeText: Proptypes.string,
-  className: Proptypes.string,
-  imgClassName: Proptypes.string,
+  icon: Proptypes.node,
   contentStyles: Proptypes.object,
-  size: Proptypes.oneOf(['sm', 'lg', 'xl']),
-  tag: Proptypes.oneOfType([Proptypes.func, Proptypes.string]),
-  status: Proptypes.oneOf(['online', 'offline', 'away', 'busy']),
+  badgeText: Proptypes.string,
   imgHeight: Proptypes.oneOfType([Proptypes.string, Proptypes.number]),
   imgWidth: Proptypes.oneOfType([Proptypes.string, Proptypes.number]),
+  size: Proptypes.oneOf(['sm', 'lg', 'xl']),
+  status: Proptypes.oneOf(['online', 'offline', 'away', 'busy']),
   badgeColor: Proptypes.oneOf([
     'primary',
     'secondary',
@@ -120,7 +116,7 @@ Avatar.propTypes = {
     'light-danger',
     'light-info',
     'light-warning',
-    'light-dark'
+    'light-dark',
   ]),
   color: Proptypes.oneOf([
     'primary',
@@ -136,7 +132,7 @@ Avatar.propTypes = {
     'light-danger',
     'light-info',
     'light-warning',
-    'light-dark'
+    'light-dark',
   ]),
   initials(props) {
     if (props['initials'] && props['content'] === undefined) {
@@ -148,10 +144,10 @@ Avatar.propTypes = {
     if (typeof props['initials'] !== 'boolean' && props['initials'] !== undefined) {
       return new Error('initials must be a boolean!')
     }
-  }
+  },
 }
 
 // ** Default Props
 Avatar.defaultProps = {
-  tag: 'div'
+  tag: 'div',
 }

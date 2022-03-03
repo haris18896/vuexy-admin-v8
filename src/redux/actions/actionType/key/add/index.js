@@ -1,0 +1,5 @@
+/* eslint-disable */
+export const ADD_SSH_KEY_INITIATED = 'ADD_SSH_KEY_INITIATED'
+export const ADD_SSH_KEY_SUCCESS = 'ADD_SSH_KEY_SUCCESS'
+export const ADD_SSH_KEY_FAILED = 'ADD_SSH_KEY_FAILED'
+export const RESET_SSH_KEY_STATE = 'RESET_SSH_KEY_STATE'

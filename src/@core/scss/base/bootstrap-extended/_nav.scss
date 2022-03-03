@@ -85,7 +85,8 @@
     color: $headings-color;
     &.active {
       border-color: $nav-pills-link-active-bg;
-      box-shadow: 0 4px 18px -4px rgba($nav-pills-link-active-bg, 0.65);
+      // box-shadow: 0 4px 18px -4px rgba($nav-pills-link-active-bg, 0.65);
+      font-weight: 600;
     }
     &.disabled {
       color: $nav-link-disabled-color;
@@ -166,6 +167,7 @@
 
       &:after {
         transform: translate3d(0, 0, 0);
+        // box-shadow: 0 0 8px 0 rgba($primary, 0.5) !important;
       }
     }
 

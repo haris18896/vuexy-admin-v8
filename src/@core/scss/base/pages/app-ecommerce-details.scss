@@ -266,12 +266,12 @@
   }
 }
 
-@include media-breakpoint-down(md) {
+@include media-breakpoint-down(sm) {
   .ecommerce-application .swiper-responsive-breakpoints.swiper-container .swiper-slide {
     padding: 1rem;
   }
 }
-@include media-breakpoint-down(md) {
+@include media-breakpoint-down(sm) {
   .ecommerce-application {
     .app-ecommerce-details {
       // ratings style
